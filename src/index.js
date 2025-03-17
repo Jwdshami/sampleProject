@@ -3,7 +3,7 @@
 
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
-import { DB_NAME  } from "./constant.js";
+
 
 // Data base sa jab b bat krni hu tu response bhejna ya ana mn time lgta ha  isilye isko
 // async await mn rakha jaye
@@ -14,7 +14,15 @@ dotenv.config({
 })
 
 
-connectDB()
+connectDB().then(()=>{
+    app.listen(process.env.PORT||8000,()=>{
+        console.log(`Server is runing at the port :${process.env.PORT}`)
+    })
+
+})
+.catch((err)=>{
+console.log("Mongo db conncection Failed !!! ",err)
+})
 
 
 
